@@ -1,0 +1,59 @@
+{% extends "home.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <a href="/search/{{ article.id }}" class="btn btn-outline-secondary mb-4">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4>{{ article.title }}</h4>
+                </div>
+                <div class="card-body">
+                    <h5><i class="fas fa-users"></i> Authors</h5>
+                    <div class="mb-3">
+                        {% for author in article.authors %}
+                        <span class="badge bg-light text-dark me-1 mb-1">
+                            <i class="fas fa-user-circle me-1"></i>{{ author }}
+                        </span>
+                        {% endfor %}
+                    </div>
+
+                    <h5><i class="fas fa-align-left"></i> Abstract</h5>
+                    <div class="abstract-box mb-4">
+                        <p>{{ article.abstract }}</p>
+                    </div>
+
+                    <h5><i class="fas fa-language"></i> Translate</h5>
+                    {% if translated_text %}
+                    <div class="translated-box">
+                        <p>{{ translated_text }}</p>
+                    </div>
+                    {% elif error %}
+                    <div class="alert alert-danger mt-3">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .abstract-box {
+        border-left: 3px solid #0d6efd;
+        padding-left: 15px;
+        background-color: #f8f9fa;
+        margin-bottom: 20px;
+    }
+    .translated-box {
+        border-left: 3px solid #198754;
+        padding-left: 15px;
+        background-color: #e8f4ed;
+    }
+</style>
+{% endblock %}
